@@ -428,7 +428,7 @@ class FairAccurateSampler(Sampler):
         weighted_S_gen = {}
         for idx, tmp_yz in enumerate(self.yz_tuple):
             weighted_S_real[tmp_yz] = self.lbs[idx] * self.mus[idx] * sum((y_real_val == tmp_yz[0]).squeeze())
-            weighted_S_gen[tmp_yz] = self.lbs[idx] * (1-self.mus[idx]) * sum((y_real_val == tmp_yz[0]).squeeze())
+            weighted_S_gen[tmp_yz] = self.lbs[idx] * (1-self.mus[idx]) * sum((y_gen_val == tmp_yz[0]).squeeze())
             
         for idx, tmp_yz in enumerate(self.yz_tuple):
             if idx == 0:
@@ -507,7 +507,7 @@ class FairAccurateSampler(Sampler):
                     np_index = np.concatenate((tmp_index[start_idx:], tmp_index[ : batch_size - (len(full_index)-start_idx)]))
                     select_index.append(np_index)
                     
-                    start_idx = len(full_index)-start_idx
+                    start_idx = batch_size - (len(full_index) - start_idx)
                 else:
                     np_index = tmp_index[start_idx:start_idx + batch_size]
                     select_index.append(np_index)
