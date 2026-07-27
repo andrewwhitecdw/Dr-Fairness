@@ -69,7 +69,7 @@ class attribute_classifier():
     
     def __init__(self, device, dtype, n_classes=1, pretrained=True, modelpath = None, learning_rate = 1e-4, use_ema = False, ema_decay = 0.99, pretrain = False, domain = False):
 
-        self.model = ResNet50(n_classes=n_classes, pretrained=True)
+        self.model = ResNet50(n_classes=n_classes, pretrained=pretrained)
         self.model.require_all_grads()
         self.optimizer = optim.Adam(self.model.parameters(), lr=learning_rate)
         if use_ema == True:
