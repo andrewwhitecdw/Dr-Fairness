@@ -308,7 +308,20 @@ def create_dataset_real_imgs(path, attribute, protected_attribute, augment=False
         temp = label[i].strip().split()
         list_ids.append(img_path+temp[0])
         y_attr[img_path+temp[0]]=torch.Tensor(([(int(temp[attribute+1])+1)/2]))
-        z_attr[img_path+temp[0]]=torch.Tensor(([(int(temp[protected_attribute+1])+1)/2]))
+        if type(protected_attribute) == list:
+            age_val = int(temp[protected_attribute[0]+1])
+            gender_val = int(temp[protected_attribute[1]+1])
+            if age_val == -1 and gender_val == -1:
+                z_attr_tmp = 0
+            elif age_val == -1 and gender_val == 1:
+                z_attr_tmp = 1
+            elif age_val == 1 and gender_val == -1:
+                z_attr_tmp = 2
+            else:
+                z_attr_tmp = 3
+            z_attr[img_path+temp[0]]=torch.Tensor(([z_attr_tmp]))
+        else:
+            z_attr[img_path+temp[0]]=torch.Tensor(([(int(temp[protected_attribute+1])+1)/2]))
 
 
     return list_ids, y_attr, z_attr
