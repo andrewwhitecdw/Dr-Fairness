@@ -33,7 +33,7 @@ import warnings
 warnings.filterwarnings("ignore")
 
 
-def train(model_class, dset_real, dset_real_val, dset_gen, dset_gen_val, device, dtype, k, target_fairness, n_classes = 1, save_path = 'intermediate_models/', batch_size = 64, num_workers = 10, data_lr = 0.01, update_iter = 1, seed = 0, start_epoch = 0):
+def train(model_class, dset_real, dset_real_val, dset_gen, dset_gen_val, device, dtype, k, target_fairness, n_classes = 1, save_path = 'intermediate_models/', batch_size = 64, num_workers = 10, data_lr = 0.01, update_iter = 1, seed = 0, start_epoch = 0, total_epochs = 2000):
     """Trains the model.
         
         Args: 
@@ -283,4 +283,4 @@ if __name__=="__main__":
         # ---------------------
         #  Run the training function
         # ---------------------
-        train(model_class, dset_real, dset_real_val, dset_gen, dset_gen_val, device, dtype, k = opt['k'], target_fairness = target_fairness, n_classes = n_classes, save_path = save_path, batch_size = batch_size, num_workers = num_workers, data_lr = opt['data_lr'], update_iter = opt['update_iter'], seed = seed)
+        train(model_class, dset_real, dset_real_val, dset_gen, dset_gen_val, device, dtype, k = opt['k'], target_fairness = target_fairness, n_classes = n_classes, save_path = save_path, batch_size = batch_size, num_workers = num_workers, data_lr = opt['data_lr'], update_iter = opt['update_iter'], seed = seed, total_epochs = total_epochs)
